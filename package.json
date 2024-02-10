@@ -1,0 +1,21 @@
+{
+  "name": "make-me-a-team-page",
+  "version": "1.0.0",
+  "description": "A command-line application that creates a html file based on user input.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
