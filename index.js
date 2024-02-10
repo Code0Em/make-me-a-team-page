@@ -1,10 +1,10 @@
 // **TASKS**
 
-// *TASK 1: Create userPrompts.js and within this create arrays to hold the different prompts for the user to answer (each relating to different role) (answers will then be used to used to generate contents of html).
+// *TASK 1: Create userPrompts.js and within this create arrays to hold the different prompts for the user to answer (each relating to different role) (answers will then be used to used to generate classes).
 // *TASK 2: Export/ import userPrompts.js to index.js (i.e. main js file).
 // *TASK 3: Create functions to return user's answers to prompts, using inquirer.prompt().
 // *TASK 4: Create classes for different roles; including superclass (employee) and three subclasses (manager, engineer and intern).
-// *TASK 5: Export/ import employee.js to index.js (i.e. main js file).
+// *TASK 5: Export/ import employee.js to manager.js, engineer.js and intern.js (to create subclasses), and export/ import those to index.js (to creates objects).
 
 // **IMPORTS**
 // Imports Node's path module
