@@ -2,6 +2,7 @@
 
 // *TASK 1: Create userPrompts.js and within this create arrays to hold the different prompts for the user to answer (each relating to different role) (answers will then be used to used to generate contents of html).
 // *TASK 2: Export/ import userPrompts.js to index.js (i.e. main js file).
+// *TASK 3: Create functions to return user's answers to prompts, using inquirer.prompt().
 
 // **IMPORTS**
 // Imports Node's path module
@@ -24,6 +25,31 @@ const render = require("./src/pageTemplate.js");
 // **GLOBAL VARIABLES**
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+
+// **FUNCTIONS**
+// Task 3: Prompts user to answer prompts from userPrompts' arrays and then returns promises (which resolves with objects containing the user's answers) (to be used to generate the classes).
+const promptManager = () => {
+    return inquirer.prompt(managerPrompts)
+};
+
+
+const promptEmployee = () => {
+    return inquirer.prompt(employeePrompts)
+};
+
+
+const promptEngineer = () => {
+    return inquirer.prompt(engineerPrompts)
+};
+
+
+const promptIntern = () => {
+    return inquirer.prompt(internPrompts)
+};
+const promptAdd = () => {
+    return inquirer.prompt(addPrompt)
+};
+
 
 
 
