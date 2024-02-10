@@ -5,12 +5,16 @@
 // *TASK 3: Create functions to return user's answers to prompts, using inquirer.prompt().
 // *TASK 4: Create classes for different roles; including superclass (employee) and three subclasses (manager, engineer and intern).
 // *TASK 5: Export/ import employee.js to manager.js, engineer.js and intern.js (to create subclasses), and export/ import those to index.js (to creates objects).
+// *TASK 6: Create function to create an output folder (for the generated html file), using fs.mkdirSync(). Add try/catch blocks for error handling and add async to function (so it returns a promise and then we can use await on function call).
+// *TASK 7: Import Node's util module and then create function to write the html file, using fs.writeFile(). Wrap this in util.promisify() to convert fs.writeFile() (which is based on callback) into a promise-based function.
 
 // **IMPORTS**
 // Imports Node's path module
 const path = require("path");
 // Imports Node's file system module
 const fs = require("fs");
+// Task 7: Imports Node's util module
+const util = require('util');
 // Imports nmp Inquirer module
 const inquirer = require("inquirer");
 // Task 2: Imports from userPrompts.js (for user prompts)
@@ -25,7 +29,10 @@ const Intern = require("./lib/intern.js");
 const render = require("./src/pageTemplate.js");
 
 // **GLOBAL VARIABLES**
+// *CREDIT: Coder’s understanding of Node.js path module developed thanks to Xpert Learning Assistant’s (2024) answer to “explain this: OUTPUT_DIR = path.resolve(__dirname, "output"); const outputPath = path.join(OUTPUT_DIR, "team.html");”.
+// Gets absolute path to output directory, using path.resolve().
 const OUTPUT_DIR = path.resolve(__dirname, "output");
+// Combines OUTPUT_DIR with a file called "team.html", using path.join() (i.e. stores the path to the "team.html" file within the "output" directory.)
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 // **FUNCTIONS**
@@ -50,6 +57,23 @@ const promptIntern = () => {
 };
 const promptAdd = () => {
     return inquirer.prompt(addPrompt)
+};
+
+// Task 6: Creates output folder (for generated html file).
+const newFolder = async () => {
+    // Sets the name (and location) of the folder.
+    const folderName = OUTPUT_DIR;
+    try {
+        // If a folder with this name doesn't (already) exist, run this codeblock.
+        if (!fs.existsSync(folderName)) {
+            // Create a new folder with this name (and location).
+            fs.mkdirSync(folderName);
+        }
+        // If an error is thrown in try block, "catch it" and run this code:
+    } catch (err) {
+        // Write the error to the console.
+        console.error(err);
+    }
 };
 
 
