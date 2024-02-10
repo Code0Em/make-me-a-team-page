@@ -127,5 +127,5 @@ addPrompt = [
     },
 ];
 
-// TASK 2: Exports to main js file
+// TASK 2: Exports the arrays (so that we can import them into main js file).
 module.exports = userPrompts;
