@@ -1,12 +1,16 @@
 // **TASKS**
 
-// *TASK 1: Create userPrompts.js and within this create arrays to hold the different prompts for the user to answer (each relating to different role) (answers will then be used to used to generate classes).
+// *TASK 1: Create userPrompts.js and within this create arrays to hold the different prompts for the user to answer (each relating to different role) (answers will then be used to used to populate classes).
 // *TASK 2: Export/ import userPrompts.js to index.js (i.e. main js file).
 // *TASK 3: Create functions to return user's answers to prompts, using inquirer.prompt().
 // *TASK 4: Create classes for different roles; including superclass (employee) and three subclasses (manager, engineer and intern).
 // *TASK 5: Export/ import employee.js to manager.js, engineer.js and intern.js (to create subclasses), and export/ import those to index.js (to creates objects).
 // *TASK 6: Create function to create an output folder (for the generated html file), using fs.mkdirSync(). Add try/catch blocks for error handling and add async to function (so it returns a promise and then we can use await on function call).
 // *TASK 7: Import Node's util module and then create function to write the html file, using fs.writeFile(). Wrap this in util.promisify() to convert fs.writeFile() (which is based on callback) into a promise-based function.
+// *TASK 8: Create function which calls render(), newFolder() and writeFileAsync() functions.
+// *TASK 9: Create empty array (this will "hold" team member objects) (from TASK 10).
+// *TASK 10: Create function to initialise the application. Add async to function (so returns promise) and try/catch blocks (to handle errors). Within try block: call promptManager function (from TASK 3) with await (so this waits for promise to be resolved before continuing), then create a manager object (passing the returned values) and then push this up to empty array; within a while loop, do the same but with engineer and intern objects; then call createPage function (passing the array); and finally log confirmation message. Within catch block: write error message to console.
+
 
 // **IMPORTS**
 // Imports Node's path module
@@ -36,7 +40,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 // **FUNCTIONS**
-// Task 3: Prompts user to answer prompts from userPrompts' arrays and then returns promises (which resolves with objects containing the user's answers) (to be used to generate the classes).
+// Task 3: Prompts user to answer prompts from userPrompts' arrays and then returns promises (which resolves with objects containing the user's answers) (to be used to populate the classes).
 const promptManager = () => {
     return inquirer.prompt(managerPrompts)
 };
@@ -60,6 +64,7 @@ const promptAdd = () => {
 };
 
 // Task 6: Creates output folder (for generated html file).
+// *CREDIT: Function adapted from Node.js (no date) Working with folders in Node.js (https://nodejs.org/en/learn/manipulating-files/working-with-folders-in-nodejs).
 const newFolder = async () => {
     // Sets the name (and location) of the folder.
     const folderName = OUTPUT_DIR;
@@ -75,6 +80,10 @@ const newFolder = async () => {
         console.error(err);
     }
 };
+
+// Task 7: Writes html file, util.promisify() converts fs.writeFile() into promise-based function.
+const writeFileAsync = util.promisify(fs.writeFile);
+
 
 
 
