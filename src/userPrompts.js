@@ -128,4 +128,10 @@ addPrompt = [
 ];
 
 // TASK 2: Exports the arrays (so that we can import them into main js file).
-module.exports = userPrompts;
+// *CREDIT: Thanks for LaunchCode Education (no date) '13.4. Exporting Modules' (https://education.launchcode.org/intro-to-professional-web-dev/chapters/modules/exporting.html) for developing coder's knowledge of this concept.
+module.exports = {
+    managerPrompts,
+    engineerPrompts,
+    internPrompts,
+    addPrompt,
+}
