@@ -1,11 +1,11 @@
 // Task 12 (changes to starter code's html templates): Updated Bootstrap link to newest version. Removed link to own CSS file (redundant). Added inline CSS. Replaced jumbotron with a simple header. Renamed title and h1. Added spacing between cards. Added a simple footer. Added Google font.
 
-// Creates the team.
+// Creates the team (passing in team array; which contains objects created via userPrompts arrays).
 const generateTeam = team => {
 
-    // Creates the manager html.
-    const generateManager = manager => {
-        return `
+  // Creates the manager html.
+  const generateManager = manager => {
+    return `
         <div class="card employee-card">
         <div class="card-header">
             <h2 class="card-title">${manager.getName()}</h2>
@@ -20,11 +20,11 @@ const generateTeam = team => {
         </div>
     </div>
         `;
-    };
+  };
 
-    // Creates the html for engineers.
-    const generateEngineer = engineer => {
-        return `
+  // Creates the html for engineers.
+  const generateEngineer = engineer => {
+    return `
         <div class="card employee-card">
     <div class="card-header">
         <h2 class="card-title">${engineer.getName()}</h2>
@@ -39,11 +39,11 @@ const generateTeam = team => {
     </div>
 </div>
         `;
-    };
+  };
 
-    // Creates the html for interns.
-    const generateIntern = intern => {
-        return `
+  // Creates the html for interns.
+  const generateIntern = intern => {
+    return `
         <div class="card employee-card">
     <div class="card-header">
         <h2 class="card-title">${intern.getName()}</h2>
@@ -58,34 +58,39 @@ const generateTeam = team => {
     </div>
 </div>
         `;
-    };
+  };
 
-    const html = [];
+  // Empty array to "hold" team html.
+  const html = [];
 
-    // 
-    html.push(team
-        .filter(employee => employee.getRole() === "Manager")
-        .map(manager => generateManager(manager))
-    );
-    html.push(team
-        .filter(employee => employee.getRole() === "Engineer")
-        .map(engineer => generateEngineer(engineer))
-        .join("")
-    );
-    html.push(team
-        .filter(employee => employee.getRole() === "Intern")
-        .map(intern => generateIntern(intern))
-        .join("")
-    );
+  // *CREDIT: Coder’s understanding of the below developed thanks to Xpert Learning Assistant’s (2024) answer to “explain this: [code below pasted]”.
+  // Filters team array to only include objects with role value of "Manager", then maps over the filtered array and calls generateManager function (passing in manager object) which gets HTML for each manager; then pushes this html up to the team array.
+  html.push(team
+    .filter(employee => employee.getRole() === "Manager")
+    .map(manager => generateManager(manager))
+  );
+  // As above but for objects with role value as "Engineer". Because there could be more than one; uses join("") method to concatenate the HTML elements into a single string before pushing up to html array.
+  html.push(team
+    .filter(employee => employee.getRole() === "Engineer")
+    .map(engineer => generateEngineer(engineer))
+    .join("")
+  );
+  // As above but for objects with role value as "Intern".
+  html.push(team
+    .filter(employee => employee.getRole() === "Intern")
+    .map(intern => generateIntern(intern))
+    .join("")
+  );
 
-    return html.join("");
+  // Uses join("") to concatenate all HTML elements of html array into single string, then returns it.
+  return html.join("");
 
 }
 
 // Exports function to generate entire page.
 module.exports = team => {
 
-    return `
+  return `
     <!DOCTYPE html>
 <html lang="en">
 

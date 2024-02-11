@@ -85,7 +85,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
 // Task 8: Calls render, newFolder and writeFileAsync functions.
 const createPage = async () => {
     try {
-        // Calls render() function, passing through team array as argument (i.e. the objects created from the class templates; of which were populated with values returned from inquirer prompt functions). “Await” pauses execution and waits for render() function to finish before continuing. When it’s finished and returns a value, that value is assigned to the htmlContent variable.
+        // Calls render() function, passing through team array as argument (i.e. the objects created from the class templates; of which were populated with values returned from inquirer prompt functions). “Await” pauses execution and waits for render() function to finish before continuing. Assigns returned value to the htmlContent variable.
         const htmlContent = render(team);
         // Calls newfolder() function, but waits for this function to finish before continuing.
         await newFolder();
