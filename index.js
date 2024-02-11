@@ -11,7 +11,7 @@
 // *TASK 9: Create empty array (this will "hold" team member objects) (from TASK 10).
 // *TASK 10: Create function to initialise the application. Add async to function (so returns promise) and try/catch blocks (to handle errors). Within try block: call promptManager function (from TASK 3) with await (so this waits for promise to be resolved before continuing), then create a manager object (passing the returned values) and then push this up to empty array; within a while loop, do the same but with engineer and intern objects; then call createPage function (passing the array); and finally log confirmation message. Within catch block: write error message to console.
 // *TASK 11: Call initApp function (from TASK 8).
-
+// *TASK 12: Update html template (in generateTeam function).
 
 // **IMPORTS**
 // Imports Node's path module
@@ -22,7 +22,7 @@ const fs = require("fs");
 const util = require('util');
 // Imports nmp Inquirer module
 const inquirer = require("inquirer");
-// Task 2: Imports from userPrompts.js (for user prompts)
+// Task 2: Imports from userPrompts.js (for user prompts' arrays)
 const userPrompts = require("./src/userPrompts");
 // Imports from manager.js (for manager class)
 const Manager = require("./lib/manager.js");
@@ -86,7 +86,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
 const createPage = async () => {
     try {
         // Calls render() function, passing through team array as argument (i.e. the objects created from the class templates; of which were populated with values returned from inquirer prompt functions). “Await” pauses execution and waits for render() function to finish before continuing. When it’s finished and returns a value, that value is assigned to the htmlContent variable.
-        const htmlContent = await render(team);
+        const htmlContent = render(team);
         // Calls newfolder() function, but waits for this function to finish before continuing.
         await newFolder();
         // Calls writeFileAsync() function, which writes htmlContent to file named "team.html" in "output" folder; but waits for this function to finish before continuing.
