@@ -1,4 +1,4 @@
-// Task 12 (changes to starter code's html templates): Updated Bootstrap link to newest version. Removed link to own CSS file (redundant). Added inline CSS. Replaced jumbotron with a simple header. Renamed title and h1. Added spacing between cards. Added a simple footer. Added Google font.
+// Task 12 (changes to starter code's html templates): Updated Bootstrap link to newest version. Removed link to own CSS file (redundant). Added inline CSS. Replaced jumbotron with a simple header. Renamed title and h1. Added spacing between cards. Added a simple footer. Added Google font. Also added separate columns for manager, engineer(s) and intern(s).
 
 // Creates the team (passing in team array; which contains objects created via userPrompts arrays).
 const generateTeam = team => {
@@ -6,57 +6,61 @@ const generateTeam = team => {
   // Creates the manager html.
   const generateManager = manager => {
     return `
-        <div class="card employee-card">
-        <div class="card-header">
-            <h2 class="card-title">${manager.getName()}</h2>
-            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i> ${manager.getRole()}</h3>
-        </div>
-        <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item">ID: ${manager.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
-            </ul>
-        </div>
+    <div class="manager-area col-12 d-flex justify-content-center gap-3 mt-3">
+    <div class="card employee-card">
+      <div class="card-header">
+        <h2 class="card-title">${manager.getName()}</h2>
+        <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i> ${manager.getRole()}</h3>
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item">ID: ${manager.getId()}</li>
+          <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
+          <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
+        </ul>
+      </div>
     </div>
+  </div>
+  <div class="engineer-area col-12 d-flex justify-content-center gap-3 mt-3">
         `;
   };
 
   // Creates the html for engineers.
   const generateEngineer = engineer => {
     return `
-        <div class="card employee-card">
+    <div class="card employee-card">
     <div class="card-header">
-        <h2 class="card-title">${engineer.getName()}</h2>
-        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i> ${engineer.getRole()}</h3>
+      <h2 class="card-title">${engineer.getName()}</h2>
+      <h3 class="card-title"><i class="fas fa-glasses mr-2"></i> ${engineer.getRole()}</h3>
     </div>
     <div class="card-body">
-        <ul class="list-group">
-            <li class="list-group-item">ID: ${engineer.getId()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-            <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a></li>
-        </ul>
+      <ul class="list-group">
+        <li class="list-group-item">ID: ${engineer.getId()}</li>
+        <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+        <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank"
+            rel="noopener noreferrer">${engineer.getGithub()}</a></li>
+      </ul>
     </div>
-</div>
+  </div>
         `;
   };
 
   // Creates the html for interns.
   const generateIntern = intern => {
     return `
-        <div class="card employee-card">
+    <div class="card employee-card">
     <div class="card-header">
-        <h2 class="card-title">${intern.getName()}</h2>
-        <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i> ${intern.getRole()}</h3>
+      <h2 class="card-title">${intern.getName()}</h2>
+      <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i> ${intern.getRole()}</h3>
     </div>
     <div class="card-body">
-        <ul class="list-group">
-            <li class="list-group-item">ID: ${intern.getId()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
-            <li class="list-group-item">University: ${intern.getSchool()}</li>
-        </ul>
+      <ul class="list-group">
+        <li class="list-group-item">ID: ${intern.getId()}</li>
+        <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
+        <li class="list-group-item">University: ${intern.getSchool()}</li>
+      </ul>
     </div>
-</div>
+  </div>
         `;
   };
 
@@ -75,6 +79,11 @@ const generateTeam = team => {
     .map(engineer => generateEngineer(engineer))
     .join("")
   );
+
+  // Pushes HTML to html array (closing engineer column div and opening intern column div)
+  html.push(`</div>
+  <div class="intern-area col-12 d-flex justify-content-center gap-3 mt-3">`)
+
   // As above but for objects with role value as "Intern".
   html.push(team
     .filter(employee => employee.getRole() === "Intern")
@@ -123,7 +132,6 @@ module.exports = team => {
   </header>
   <div class="container">
     <div class="row">
-      <div class="team-area col-12 d-flex justify-content-center gap-3 mt-3">
         ${generateTeam(team)}
       </div>
     </div>
